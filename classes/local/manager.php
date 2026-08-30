@@ -144,6 +144,17 @@ class manager {
     }
 
     /**
+     * Is the external content embedded on the activity page (as opposed to opening in a new window)?
+     *
+     * @return bool
+     */
+    public function is_embedded(): bool {
+        global $CFG;
+        require_once($CFG->libdir . '/resourcelib.php');
+        return (int) $this->browse->display === RESOURCELIB_DISPLAY_EMBED;
+    }
+
+    /**
      * Mark the activity as viewed: trigger the event and update view completion.
      */
     public function mark_viewed(): void {

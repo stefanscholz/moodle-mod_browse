@@ -37,9 +37,10 @@ $manager = \mod_browse\local\manager::from_coursemodule($cm, $browse, $course);
 $manager->mark_viewed();
 
 $PAGE->set_url('/mod/browse/view.php', ['id' => $cm->id]);
-$PAGE->set_title($course->shortname . ': ' . $browse->name);
+$PAGE->set_title($course->shortname . ': ' . format_string($browse->name));
 $PAGE->set_heading($course->fullname);
 $PAGE->set_activity_record($browse);
+$PAGE->requires->js_call_amd('mod_browse/steps', 'init', [$cm->id]);
 
 echo $OUTPUT->header();
 
