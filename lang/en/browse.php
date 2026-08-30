@@ -41,7 +41,8 @@ $string['deletestepconfirm'] ='Are you sure you want to delete the step "{$a}"? 
 $string['displayselect'] = 'Display';
 $string['displayselect_help'] = '* Embed - The external content is shown on the activity page next to the list of steps.
 * New window - The list of steps is shown on the activity page and the external content opens in a new browser window.';
-$string['eventstepcompleted'] = 'Browse step completed';
+$string['editstep'] = 'Edit step';
+$string['eventstepcompleted'] ='Browse step completed';
 $string['externalurl'] = 'External URL';
 $string['externalurl_help'] = 'The address of the external content that students should browse, for example https://example.com/survey.';
 $string['invalidstep'] = 'Invalid step';
