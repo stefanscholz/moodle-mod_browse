@@ -56,7 +56,9 @@ final class lib_test extends \advanced_testcase {
         $otherstep = $othermanager->add_step((object) ['title' => 'Keep', 'type' => manager::STEP_MANUAL]);
         $othermanager->complete_step($otherstep, (int) $student->id);
 
-        course_delete_module($browse->cmid);
+        $cmactions = new \core_courseformat\local\cmactions($course);
+        $cmactions->delete($browse->cmid);
+        $this->runAdhocTasks();
 
         $this->assertFalse($DB->record_exists('browse', ['id' => $browse->id]));
         $this->assertFalse($DB->record_exists('browse_steps', ['browseid' => $browse->id]));
