@@ -33,7 +33,6 @@ require_once($CFG->libdir . '/resourcelib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_browse_generator extends testing_module_generator {
-
     /**
      * Create a browse activity instance.
      *
@@ -57,15 +56,30 @@ class mod_browse_generator extends testing_module_generator {
     /**
      * Create a step within a browse activity.
      *
-     * @param stdClass $browse the browse instance record
-     * @param array|stdClass|null $record step data
+     * @param array|stdClass $record step data, must contain the browseid
      * @return stdClass the created step record
      */
-    public function create_step(stdClass $browse, $record = null): stdClass {
+    public function create_step($record): stdClass {
+        global $DB;
+
         $record = (object) (array) $record;
 
+        if (empty($record->browseid)) {
+            throw new coding_exception('Step generator requires the browseid.');
+        }
+        $browse = $DB->get_record('browse', ['id' => $record->browseid], '*', MUST_EXIST);
+
         if (!isset($record->title)) {
-            $record->title = 'Step ' . $this->stepcount($browse);
+            $record->title = 'Step ' . ($DB->count_records('browse_steps', ['browseid' => $browse->id]) + 1);
+        }
+        if (isset($record->type) && !is_number($record->type)) {
+            // Allow the readable type names, mainly for Behat.
+            $record->type = match ($record->type) {
+                'manual' => \mod_browse\local\manager::STEP_MANUAL,
+                'link' => \mod_browse\local\manager::STEP_LINK,
+                'callback' => \mod_browse\local\manager::STEP_CALLBACK,
+                default => throw new coding_exception('Unknown step type: ' . $record->type),
+            };
         }
         if (!isset($record->type)) {
             $record->type = \mod_browse\local\manager::STEP_MANUAL;
@@ -73,16 +87,5 @@ class mod_browse_generator extends testing_module_generator {
 
         $manager = \mod_browse\local\manager::from_instance($browse);
         return $manager->add_step($record);
-    }
-
-    /**
-     * Count the existing steps of an instance, for default step titles.
-     *
-     * @param stdClass $browse the browse instance record
-     * @return int the next step number
-     */
-    private function stepcount(stdClass $browse): int {
-        global $DB;
-        return $DB->count_records('browse_steps', ['browseid' => $browse->id]) + 1;
     }
 }

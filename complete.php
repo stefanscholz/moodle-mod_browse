@@ -62,6 +62,8 @@ if (has_capability('mod/browse:completesteps', $context) && !isguestuser()) {
 echo $OUTPUT->header();
 echo $OUTPUT->notification(
     get_string('stepcompletedmessage', 'browse', format_string($step->title, true, ['context' => $context])),
-    \core\output\notification::NOTIFY_SUCCESS, false);
+    \core\output\notification::NOTIFY_SUCCESS,
+    false
+);
 echo $OUTPUT->single_button($viewurl, get_string('continue'), 'get', ['type' => 'primary']);
 echo $OUTPUT->footer();

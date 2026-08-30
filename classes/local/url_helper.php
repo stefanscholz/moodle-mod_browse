@@ -29,7 +29,6 @@ namespace mod_browse\local;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class url_helper {
-
     /**
      * Weak url validation, looking for major problems only.
      *

@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Restores the browse structure from backup, with user data.
  *
@@ -32,7 +30,6 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_browse_activity_structure_step extends restore_activity_structure_step {
-
     /**
      * Define the restore paths.
      *
@@ -45,8 +42,10 @@ class restore_browse_activity_structure_step extends restore_activity_structure_
         $paths[] = new restore_path_element('browse', '/activity/browse');
         $paths[] = new restore_path_element('browse_step', '/activity/browse/steps/step');
         if ($userinfo) {
-            $paths[] = new restore_path_element('browse_progress',
-                '/activity/browse/steps/step/progresses/progress');
+            $paths[] = new restore_path_element(
+                'browse_progress',
+                '/activity/browse/steps/step/progresses/progress'
+            );
         }
 
         return $this->prepare_activity_structure($paths);

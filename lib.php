@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * List of features supported by the browse module.
  *
@@ -173,14 +171,22 @@ function browse_extend_settings_navigation(settings_navigation $settings, naviga
     $cm = $settings->get_page()->cm;
 
     if (has_capability('mod/browse:managesteps', $cm->context)) {
-        $node->add(get_string('managesteps', 'browse'),
+        $node->add(
+            get_string('managesteps', 'browse'),
             new moodle_url('/mod/browse/managesteps.php', ['id' => $cm->id]),
-            navigation_node::TYPE_SETTING, null, 'mod_browse_managesteps');
+            navigation_node::TYPE_SETTING,
+            null,
+            'mod_browse_managesteps'
+        );
     }
     if (has_capability('mod/browse:viewreport', $cm->context)) {
-        $node->add(get_string('report', 'browse'),
+        $node->add(
+            get_string('report', 'browse'),
             new moodle_url('/mod/browse/report.php', ['id' => $cm->id]),
-            navigation_node::TYPE_SETTING, null, 'mod_browse_report');
+            navigation_node::TYPE_SETTING,
+            null,
+            'mod_browse_report'
+        );
     }
 }
 
@@ -216,11 +222,14 @@ function browse_reset_userdata($data) {
     $status = [];
 
     if (!empty($data->reset_browse_progress)) {
-        $DB->delete_records_select('browse_progress',
+        $DB->delete_records_select(
+            'browse_progress',
             'stepid IN (SELECT s.id
                           FROM {browse_steps} s
                           JOIN {browse} b ON b.id = s.browseid
-                         WHERE b.course = ?)', [$data->courseid]);
+                         WHERE b.course = ?)',
+            [$data->courseid]
+        );
 
         $status[] = [
             'component' => get_string('modulenameplural', 'browse'),

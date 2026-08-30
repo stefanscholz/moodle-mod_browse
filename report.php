@@ -53,8 +53,13 @@ if (!$steps) {
 }
 
 $userfields = \core_user\fields::for_name()->get_sql('u', false, '', '', false)->selects;
-$users = get_enrolled_users($context, 'mod/browse:completesteps', $currentgroup ?: 0,
-    'u.id, ' . $userfields, 'u.lastname ASC, u.firstname ASC');
+$users = get_enrolled_users(
+    $context,
+    'mod/browse:completesteps',
+    $currentgroup ?: 0,
+    'u.id, ' . $userfields,
+    'u.lastname ASC, u.firstname ASC'
+);
 
 // All recorded progress of this activity, keyed by user and step.
 $progress = [];
@@ -79,7 +84,8 @@ $yes = $OUTPUT->pix_icon('i/grade_correct', get_string('stepdone', 'browse'));
 foreach ($users as $user) {
     $row = [html_writer::link(
         new moodle_url('/user/view.php', ['id' => $user->id, 'course' => $course->id]),
-        fullname($user))];
+        fullname($user)
+    )];
     $complete = 0;
     foreach ($steps as $step) {
         if (isset($progress[$user->id][$step->id])) {

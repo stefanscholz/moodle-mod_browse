@@ -22,8 +22,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Defines the complete browse structure for backup, with user data.
  *
@@ -32,7 +30,6 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class backup_browse_activity_structure_step extends backup_activity_structure_step {
-
     /**
      * Define the backup structure.
      *

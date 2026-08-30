@@ -37,7 +37,6 @@ use mod_browse\local\url_helper;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class mod_browse_mod_form extends moodleform_mod {
-
     /**
      * Form definition.
      */

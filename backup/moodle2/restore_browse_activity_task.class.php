@@ -34,7 +34,6 @@ require_once($CFG->dirroot . '/mod/browse/backup/moodle2/restore_browse_stepslib
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class restore_browse_activity_task extends restore_activity_task {
-
     /**
      * No specific settings for this activity.
      */

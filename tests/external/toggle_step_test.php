@@ -33,7 +33,6 @@ require_once($CFG->dirroot . '/webservice/tests/helpers.php');
  */
 #[CoversClass(toggle_step::class)]
 final class toggle_step_test extends \externallib_advanced_testcase {
-
     /**
      * Create a course, an activity with one manual step, and an enrolled student.
      *

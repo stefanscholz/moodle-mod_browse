@@ -99,19 +99,23 @@ if (!$steps) {
         if ($index > 0) {
             $actions[] = $OUTPUT->action_icon(
                 new moodle_url($pageurl, ['action' => 'moveup', 'step' => $step->id, 'sesskey' => sesskey()]),
-                new pix_icon('t/up', get_string('moveup')));
+                new pix_icon('t/up', get_string('moveup'))
+            );
         }
         if ($index < count($steps) - 1) {
             $actions[] = $OUTPUT->action_icon(
                 new moodle_url($pageurl, ['action' => 'movedown', 'step' => $step->id, 'sesskey' => sesskey()]),
-                new pix_icon('t/down', get_string('movedown')));
+                new pix_icon('t/down', get_string('movedown'))
+            );
         }
         $actions[] = $OUTPUT->action_icon(
             new moodle_url('/mod/browse/editstep.php', ['cmid' => $cm->id, 'step' => $step->id]),
-            new pix_icon('t/edit', get_string('edit')));
+            new pix_icon('t/edit', get_string('edit'))
+        );
         $actions[] = $OUTPUT->action_icon(
             new moodle_url($pageurl, ['action' => 'delete', 'step' => $step->id, 'sesskey' => sesskey()]),
-            new pix_icon('t/delete', get_string('delete')));
+            new pix_icon('t/delete', get_string('delete'))
+        );
 
         $urlcell = '';
         if ((int) $step->type === \mod_browse\local\manager::STEP_LINK) {
@@ -139,6 +143,9 @@ if (!$steps) {
 
 echo $OUTPUT->single_button(
     new moodle_url('/mod/browse/editstep.php', ['cmid' => $cm->id]),
-    get_string('addstep', 'browse'), 'get', ['type' => 'primary']);
+    get_string('addstep', 'browse'),
+    'get',
+    ['type' => 'primary']
+);
 
 echo $OUTPUT->footer();

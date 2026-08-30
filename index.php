@@ -45,8 +45,10 @@ echo $OUTPUT->heading(get_string('modulenameplural', 'browse'));
 
 $modinfo = get_fast_modinfo($course);
 if (empty($modinfo->instances['browse'])) {
-    notice(get_string('thereareno', 'moodle', get_string('modulenameplural', 'browse')),
-        new moodle_url('/course/view.php', ['id' => $course->id]));
+    notice(
+        get_string('thereareno', 'moodle', get_string('modulenameplural', 'browse')),
+        new moodle_url('/course/view.php', ['id' => $course->id])
+    );
 }
 
 $table = new html_table();

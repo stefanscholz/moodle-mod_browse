@@ -35,9 +35,8 @@ use core_privacy\local\request\writer;
  */
 class provider implements
     \core_privacy\local\metadata\provider,
-    \core_privacy\local\request\plugin\provider,
-    \core_privacy\local\request\core_userlist_provider {
-
+    \core_privacy\local\request\core_userlist_provider,
+    \core_privacy\local\request\plugin\provider {
     /**
      * Describe the personal data stored by the plugin.
      *
@@ -213,8 +212,11 @@ class provider implements
         if ($stepids && $userids) {
             [$stepsql, $params] = $DB->get_in_or_equal($stepids, SQL_PARAMS_NAMED, 'step');
             [$usersql, $userparams] = $DB->get_in_or_equal($userids, SQL_PARAMS_NAMED, 'user');
-            $DB->delete_records_select('browse_progress',
-                "stepid $stepsql AND userid $usersql", $params + $userparams);
+            $DB->delete_records_select(
+                'browse_progress',
+                "stepid $stepsql AND userid $usersql",
+                $params + $userparams
+            );
         }
     }
 }

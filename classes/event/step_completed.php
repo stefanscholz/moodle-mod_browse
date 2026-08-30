@@ -31,7 +31,6 @@ namespace mod_browse\event;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class step_completed extends \core\event\base {
-
     /**
      * Initialise the event data.
      */

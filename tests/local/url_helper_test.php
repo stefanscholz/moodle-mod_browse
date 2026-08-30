@@ -27,7 +27,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(url_helper::class)]
 final class url_helper_test extends \advanced_testcase {
-
     /**
      * Common URL mistakes are fixed on submission.
      */
@@ -70,8 +69,10 @@ final class url_helper_test extends \advanced_testcase {
             'parameter_2' => 'course',
             'variable_2' => 'courseshortname',
         ];
-        $this->assertSame(['uid' => 'userid', 'course' => 'courseshortname'],
-            url_helper::decode_parameters(url_helper::parameters_from_formdata($data)));
+        $this->assertSame(
+            ['uid' => 'userid', 'course' => 'courseshortname'],
+            url_helper::decode_parameters(url_helper::parameters_from_formdata($data))
+        );
 
         // Data that does not come from the form leaves the stored parameters alone.
         $this->assertNull(url_helper::parameters_from_formdata((object) ['name' => 'No form fields']));
@@ -83,16 +84,26 @@ final class url_helper_test extends \advanced_testcase {
     public function test_append_parameters(): void {
         $values = ['userid' => 7, 'coursefullname' => 'Fun & games'];
 
-        $this->assertSame('https://example.com/?uid=7',
-            url_helper::append_parameters('https://example.com/', ['uid' => 'userid'], $values));
-        $this->assertSame('https://example.com/?x=1&uid=7',
-            url_helper::append_parameters('https://example.com/?x=1', ['uid' => 'userid'], $values));
-        $this->assertSame('https://example.com/?c=Fun%20%26%20games',
-            url_helper::append_parameters('https://example.com/', ['c' => 'coursefullname'], $values));
-        $this->assertSame('https://example.com/',
-            url_helper::append_parameters('https://example.com/', ['x' => 'nosuchvariable'], $values));
-        $this->assertSame('https://example.com/',
-            url_helper::append_parameters('https://example.com/', [], $values));
+        $this->assertSame(
+            'https://example.com/?uid=7',
+            url_helper::append_parameters('https://example.com/', ['uid' => 'userid'], $values)
+        );
+        $this->assertSame(
+            'https://example.com/?x=1&uid=7',
+            url_helper::append_parameters('https://example.com/?x=1', ['uid' => 'userid'], $values)
+        );
+        $this->assertSame(
+            'https://example.com/?c=Fun%20%26%20games',
+            url_helper::append_parameters('https://example.com/', ['c' => 'coursefullname'], $values)
+        );
+        $this->assertSame(
+            'https://example.com/',
+            url_helper::append_parameters('https://example.com/', ['x' => 'nosuchvariable'], $values)
+        );
+        $this->assertSame(
+            'https://example.com/',
+            url_helper::append_parameters('https://example.com/', [], $values)
+        );
     }
 
     /**
@@ -137,8 +148,10 @@ final class url_helper_test extends \advanced_testcase {
         ]);
         [$course, $cm] = get_course_and_cm_from_cmid($browse->cmid, 'browse');
 
-        $this->assertSame("https://example.com/survey?uid={$user->id}&course=C-BROWSE",
-            url_helper::get_full_url($browse, $cm, $course));
+        $this->assertSame(
+            "https://example.com/survey?uid={$user->id}&course=C-BROWSE",
+            url_helper::get_full_url($browse, $cm, $course)
+        );
     }
 
     /**
@@ -159,7 +172,9 @@ final class url_helper_test extends \advanced_testcase {
         [$course, $cm] = get_course_and_cm_from_cmid($browse->cmid, 'browse');
 
         $step = (object) ['url' => 'https://example.com/page2'];
-        $this->assertSame("https://example.com/page2?uid={$user->id}",
-            url_helper::get_step_url($step, $browse, $cm, $course));
+        $this->assertSame(
+            "https://example.com/page2?uid={$user->id}",
+            url_helper::get_step_url($step, $browse, $cm, $course)
+        );
     }
 }

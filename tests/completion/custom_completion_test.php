@@ -28,7 +28,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(custom_completion::class)]
 final class custom_completion_test extends \advanced_testcase {
-
     /**
      * Create a course with completion enabled, an activity with the steps rule, and an enrolled student.
      *

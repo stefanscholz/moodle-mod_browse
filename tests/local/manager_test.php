@@ -27,7 +27,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(manager::class)]
 final class manager_test extends \advanced_testcase {
-
     /**
      * Create a course, a browse activity and its manager.
      *
@@ -239,8 +238,8 @@ final class manager_test extends \advanced_testcase {
 
         /** @var \mod_browse_generator $plugingenerator */
         $plugingenerator = $this->getDataGenerator()->get_plugin_generator('mod_browse');
-        $plugingenerator->create_step($browse);
-        $plugingenerator->create_step($browse, ['title' => 'Custom', 'type' => manager::STEP_CALLBACK]);
+        $plugingenerator->create_step(['browseid' => $browse->id]);
+        $plugingenerator->create_step(['browseid' => $browse->id, 'title' => 'Custom', 'type' => 'callback']);
 
         $steps = array_values($manager->get_steps());
         $this->assertCount(2, $steps);

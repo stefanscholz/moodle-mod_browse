@@ -29,7 +29,6 @@ use mod_browse\local\manager;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class custom_completion extends activity_custom_completion {
-
     /**
      * Fetch the completion state for a given completion rule.
      *

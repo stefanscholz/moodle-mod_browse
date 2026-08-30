@@ -32,7 +32,6 @@ use stdClass;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class manager {
-
     /** @var int Step is ticked off manually by the student. */
     public const STEP_MANUAL = 0;
 
@@ -199,8 +198,12 @@ class manager {
      */
     public function get_step(int $stepid): stdClass {
         global $DB;
-        return $DB->get_record('browse_steps',
-            ['id' => $stepid, 'browseid' => $this->browse->id], '*', MUST_EXIST);
+        return $DB->get_record(
+            'browse_steps',
+            ['id' => $stepid, 'browseid' => $this->browse->id],
+            '*',
+            MUST_EXIST
+        );
     }
 
     /**
@@ -219,8 +222,11 @@ class manager {
         $step->descriptionformat = $data->descriptionformat ?? FORMAT_HTML;
         $step->type = (int) ($data->type ?? self::STEP_MANUAL);
         $step->url = isset($data->url) ? trim((string) $data->url) : null;
-        $step->sortorder = 1 + (int) $DB->get_field('browse_steps', 'COALESCE(MAX(sortorder), 0)',
-            ['browseid' => $this->browse->id]);
+        $step->sortorder = 1 + (int) $DB->get_field(
+            'browse_steps',
+            'COALESCE(MAX(sortorder), 0)',
+            ['browseid' => $this->browse->id]
+        );
         $step->timecreated = time();
         $step->timemodified = $step->timecreated;
 

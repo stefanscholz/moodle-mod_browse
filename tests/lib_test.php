@@ -34,7 +34,6 @@ require_once($CFG->dirroot . '/course/lib.php');
  */
 #[CoversNothing]
 final class lib_test extends \advanced_testcase {
-
     /**
      * Deleting an instance removes its steps and progress.
      */

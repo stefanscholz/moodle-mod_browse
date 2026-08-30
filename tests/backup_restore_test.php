@@ -35,7 +35,6 @@ require_once($CFG->dirroot . '/course/lib.php');
  */
 #[CoversNothing]
 final class backup_restore_test extends \advanced_testcase {
-
     /**
      * Duplicating an activity copies the configuration and steps but not user progress.
      */
@@ -98,8 +97,14 @@ final class backup_restore_test extends \advanced_testcase {
         $manager->complete_step($step1, (int) $student->id);
 
         // Backup the course including user data.
-        $bc = new \backup_controller(\backup::TYPE_1COURSE, $course->id, \backup::FORMAT_MOODLE,
-            \backup::INTERACTIVE_NO, \backup::MODE_GENERAL, $USER->id);
+        $bc = new \backup_controller(
+            \backup::TYPE_1COURSE,
+            $course->id,
+            \backup::FORMAT_MOODLE,
+            \backup::INTERACTIVE_NO,
+            \backup::MODE_GENERAL,
+            $USER->id
+        );
         $bc->get_plan()->get_setting('users')->set_value(true);
         $bc->execute_plan();
         $results = $bc->get_results();
@@ -113,8 +118,14 @@ final class backup_restore_test extends \advanced_testcase {
 
         // Restore into a new course.
         $newcourseid = \restore_dbops::create_new_course('Restored', 'RST1', $course->category);
-        $rc = new \restore_controller($backupid, $newcourseid, \backup::INTERACTIVE_NO,
-            \backup::MODE_GENERAL, $USER->id, \backup::TARGET_NEW_COURSE);
+        $rc = new \restore_controller(
+            $backupid,
+            $newcourseid,
+            \backup::INTERACTIVE_NO,
+            \backup::MODE_GENERAL,
+            $USER->id,
+            \backup::TARGET_NEW_COURSE
+        );
         $this->assertTrue($rc->execute_precheck());
         $rc->execute_plan();
         $rc->destroy();

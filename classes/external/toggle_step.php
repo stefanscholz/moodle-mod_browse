@@ -32,7 +32,6 @@ use mod_browse\local\manager;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class toggle_step extends external_api {
-
     /**
      * Parameter definition.
      *

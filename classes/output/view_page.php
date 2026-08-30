@@ -32,7 +32,6 @@ use templatable;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class view_page implements renderable, templatable {
-
     /** @var manager the activity manager */
     private manager $manager;
 

@@ -32,7 +32,6 @@ use PHPUnit\Framework\Attributes\CoversClass;
  */
 #[CoversClass(provider::class)]
 final class provider_test extends \core_privacy\tests\provider_testcase {
-
     /**
      * Create two activities with progress from two users.
      *
@@ -68,7 +67,9 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
 
         $contextids = provider::get_contexts_for_userid((int) $user1->id)->get_contextids();
         $this->assertEqualsCanonicalizing(
-            [$manager1->get_context()->id, $manager2->get_context()->id], $contextids);
+            [$manager1->get_context()->id, $manager2->get_context()->id],
+            $contextids
+        );
 
         $contextids = provider::get_contexts_for_userid((int) $user2->id)->get_contextids();
         $this->assertEquals([$manager1->get_context()->id], $contextids);
@@ -131,8 +132,11 @@ final class provider_test extends \core_privacy\tests\provider_testcase {
         $this->resetAfterTest();
         [$manager1, $manager2, $user1, $user2] = $this->setup_progress();
 
-        $contextlist = new approved_contextlist($user1, 'mod_browse',
-            [$manager1->get_context()->id, $manager2->get_context()->id]);
+        $contextlist = new approved_contextlist(
+            $user1,
+            'mod_browse',
+            [$manager1->get_context()->id, $manager2->get_context()->id]
+        );
         provider::delete_data_for_user($contextlist);
 
         $this->assertEmpty($manager1->get_user_progress((int) $user1->id));
